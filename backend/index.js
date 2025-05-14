@@ -26,7 +26,11 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/messages", messageRoutes);
-
+app.use((req, res, next) => {
+  const error = new Error("Route not found");
+  error.code = 404;
+  next(error);
+});
 //connexion BD + demarrage serveur web
 
 app.listen(PORT, () => {
